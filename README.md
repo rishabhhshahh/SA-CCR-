@@ -14,42 +14,34 @@ This project implements the **Standardized Approach for Counterparty Credit Risk
 ### **2. Risk Quantification**
 
 #### Adjusted Notional
-\[
-\text{Adjusted Notional (}d_i\text{)} = \text{Notional} \times \text{Supervisory Duration (SD)}
-\]
+Adjusted Notional (d_i) = Notional × Supervisory Duration (SD)
 
-Where:
-\[
-SD = \max\left( e^{-0.05 \cdot S} - e^{-0.05 \cdot E}, 0.05 \right), \text{S = Start Date, E = End Date.}
-\]
+Supervisory Duration (SD) = max(e^(-0.05 × S) - e^(-0.05 × E), 0.05) where:
 
+S = Start Date
+E = End Date
 #### Replacement Cost (RC)
 For margined and unmargined netting sets:
-\[
-RC = \max\left(0, V - C + \text{MTA} + \text{TH} - \text{NICA}\right)
-\]
-Where:
-- \(V\): Market Value  
-- \(C\): Collateral Value  
-- \(\text{MTA}\): Minimum Transfer Amount  
-- \(\text{TH}\): Threshold Amount  
-- \(\text{NICA}\): Net Independent Collateral Amount  
+RC = max(0, V - C + MTA + TH - NICA)
 
+where:
+
+V: Market Value
+C: Collateral Value
+MTA: Minimum Transfer Amount
+TH: Threshold Amount
+NICA: Net Independent Collateral Amount
 #### Potential Future Exposure (PFE)
-\[
-PFE = \text{Multiplier} \times \text{AddOn}_{\text{Aggregate}}
-\]
+PFE = Multiplier × AddOn_Aggregate
 
-\[
-\text{Multiplier} = \min\left(1, 0.05 + 0.95 \cdot \exp\left(-\frac{V - C}{1.9 \cdot \text{AddOn}_{\text{Aggregate}}}\right)\right)
-\]
+Multiplier = min(1, 0.05 + 0.95 × exp(-(V - C) / (1.9 × AddOn_Aggregate)))
 
 #### Exposure at Default (EAD)
-\[
-EAD = \alpha \times (RC + PFE)
-\]
-Where:
-- \(\alpha = 1.4\), a regulatory multiplier to capture wrong-way risk and model uncertainty.
+EAD = α × (RC + PFE)
+
+where:
+
+α = 1.4 (Regulatory multiplier to capture wrong-way risk and uncertainty)
 
 ### **3. Validation and Analysis**
 - Calculations were validated in **Excel**, ensuring accurate implementation of RC, PFE, and EAD formulas.
